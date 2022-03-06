@@ -1,5 +1,6 @@
 import os, json
 
+import requests
 from flask import Flask, jsonify, request, make_response, abort
 from functions import *
 app = Flask(__name__)
@@ -12,15 +13,7 @@ DATA_DIR = os.path.join(BASE_DIR, "data")
 def perform_query():
     if request.method == "POST":
         payload = request.json
-    # payload = {
-    #     'file_name': 'apache_logs.txt',
-    #     'cmd1': 'map',
-    #     'value1': '0',
-    #     'cmd2': 'limit',
-    #     'value2': '3'
-    # }
         file_name = payload.get('file_name')
-
         if file_name:
             path = f'{DATA_DIR}\\{file_name}'
             if os.path.exists(path):
@@ -57,3 +50,13 @@ def perform_query():
 
 if __name__ == '__main__':
     app.run(host="localhost", port=10001, debug=True)
+    # payload = {
+    #     'file_name': 'apache_logs.txt',
+    #     'cmd1': 'map',
+    #     'value1': '0',
+    #     'cmd2': 'limit',
+    #     'value2': '3'
+    # }
+    # client = app.test_client()
+    # response = client.post('/perform_query', json=payload)
+    # print(response.data)

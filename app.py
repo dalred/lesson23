@@ -1,7 +1,7 @@
 import os, json
 
-import requests
-from flask import Flask, jsonify, request, make_response, abort
+
+from flask import Flask, request, abort
 from functions import *
 app = Flask(__name__)
 
@@ -24,7 +24,7 @@ def perform_query():
                 result = []
                 if cmd1:
                     if cmd1 == 'filter':
-                        result = filter_file(readfile(path), word=value1)
+                        result = regex_search(readfile(path), search_pattern=value1)
                     elif cmd1 == 'sort':
                         result = sort_file(readfile(path), reverse=value1)
                     elif cmd1 == 'map':
@@ -35,7 +35,7 @@ def perform_query():
                         result = unique_(readfile(path))
                 if cmd2:
                     if cmd2 == 'filter':
-                        result = filter_file(result, word=value2)
+                        result = regex_search(result, search_pattern=value2)
                     elif cmd2 == 'sort':
                         result = sort_file(result, reverse=value2)
                     elif cmd2 == 'limit':

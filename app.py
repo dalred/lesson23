@@ -23,7 +23,7 @@ def perform_query():
                 value2 = payload.get('value2')
                 result = []
                 if cmd1:
-                    if cmd1 == 'filter':
+                    if cmd1 == 'regex':
                         result = regex_search(readfile(path), search_pattern=value1)
                     elif cmd1 == 'sort':
                         result = sort_file(readfile(path), reverse=value1)
@@ -34,7 +34,7 @@ def perform_query():
                     elif cmd1 == 'unique':
                         result = unique_(readfile(path))
                 if cmd2:
-                    if cmd2 == 'filter':
+                    if cmd2 == 'regex':
                         result = regex_search(result, search_pattern=value2)
                     elif cmd2 == 'sort':
                         result = sort_file(result, reverse=value2)
